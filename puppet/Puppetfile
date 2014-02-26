@@ -1,0 +1,19 @@
+# Configuration for librarian-puppet. For example:
+#
+forge "http://forge.puppetlabs.com"
+
+
+mod 'java',
+  :git => 'https://github.com/puppetlabs/puppetlabs-java.git'
+
+
+# Add the puppet-kafka module
+mod 'kafka',
+  :git => 'https://github.com/miguno/puppet-kafka.git'
+
+# Add the puppet-limits and puppet-supervisor module dependencies
+mod 'limits',
+  :git => 'https://github.com/miguno/puppet-limits.git'
+
+mod 'supervisor',
+  :git => 'https://github.com/miguno/puppet-supervisor.git'
