@@ -1,6 +1,6 @@
 class basic{
   # run apt-get update before anything else runs
-  class {'basic::update_aptget': stage => first} ->
+  class {'basic::update_yum': stage => first} ->
   class {"basic::users":} ->
   class {"basic::packages":} ->
   class {"basic::helpers":}
@@ -14,9 +14,9 @@ class basic::users{
 
 # just some packages
 class basic::packages{
-  package{"tmux": ensure => installed}
-  package{"curl": ensure => installed}
-  package{"vim":  ensure => installed}
+#  package{"tmux": ensure => installed}
+#  package{"curl": ensure => installed}
+#  package{"vim":  ensure => installed}
 }
 
 
@@ -37,9 +37,9 @@ class basic::helpers{
 }
 
 # brings the system up-to-date after importing it with Vagrant
-# runs only once after booting (checks /tmp/apt-get-update existence)
-class basic::update_aptget{
-  exec{"yum update && touch /tmp/apt-get-updated":
-    unless => "test -e /tmp/apt-get-updated"
+# runs only once after booting (checks /tmp/yum-updated existence)
+class basic::update_yum{
+  exec{"yum -y update && touch /tmp/yum-updated":
+    unless => "test -e /tmp/yum-updated"
   }
 }
