@@ -1,0 +1,22 @@
+---
+classes:
+  - kafka::service
+  - supervisor
+
+## Kafka
+kafka::brokers:
+  broker0:
+    broker_id: 0
+    config_map:
+      log.roll.hours: 48
+      log.retention.hours: 48
+    kafka_heap_opts: '-Xms2G -Xmx2G -XX:NewSize=256m -XX:MaxNewSize=256m'
+    kafka_opts: '-XX:CMSInitiatingOccupancyFraction=70 -XX:+PrintTenuringDistribution'
+    zookeeper_connect:
+      - 'xxx.xxx.com:2181'
+
+# Optional: Manage /etc/security/limits.conf to tune the maximum number
+# of open files, which is a typical setting you must change for Kafka
+# production environments.  Default: false (do not manage)
+kafka::limits_manage: true
+kafka::limits_nofile: 65536
